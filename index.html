@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>inkys party</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,14 +12,18 @@
             display: flex;
             height: 100vh;
         }
-
+        .content {
            flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f9f9f9;
-        }     .content {
-    
+            /*background-color: #f9f9f9;*/
+        }
+
+        .hideme {
+            display: none;
+            visibility: hidden;
+        }
 
         .content h1 {
             color: black;
@@ -27,12 +31,16 @@
         }
 
         .sidebar {
-            width: 200px;
+            /*width: 200px;*/
             background-color: #333;
             color: white;
             display: flex;
-            flex-direction: column;
-            padding: 20px;
+            flex-direction: row;
+            position: fixed;
+
+            top: 0;
+            width: 100%;
+            padding: 5px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
@@ -40,6 +48,7 @@
             color: white;
             text-decoration: none;
             margin: 10px 0;
+            padding: 5px;
             font-size: 1rem;
         }
 
@@ -54,19 +63,58 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            object-fit: cover;
+            object-fit: contain;
             opacity: 0.5;
         }
     </style>
 </head>
+<script>
+    function setmain(page){
+        var children = document.querySelector(".content").children
+        var foundmatch = false;
+        for (var i = 0; i < children.length; i++) {
+            if (children[i].id == page){
+                children[i].className = ""
+                foundmatch = true;
+            }
+            else{
+                children[i].className = "hideme"
+            }
+        }
+        if (!foundmatch) {
+            document.getElementById("welcome").className = "";
+        }
+    }
+</script>
 <body>
+    <div class="sidebar">
+        <a href="" onclick="setmain('welcome')">Hi</a>
+        <a href="#menu" onclick="setmain('menu')">Menu</a>
+        <a href="#general-info" onclick="setmain('general')">General Information</a>
+    </div>
     <img class="background" src="cat.png" alt="Background">
     <div class="content">
-        <h1>Welcome</h1>
+        <div id="welcome" class="">
+            <h1>welcome</br>to inkys party</h1>
+        </div>
+
+
+        <div id="menu" class="hideme">
+            <h1>
+                we'll have food. </br>
+                more details later.
+            </h1>
+        </div>
+
+
+        <div id="general" class="hideme">
+            <h1>
+                Location: my house</br>
+                Time: 7pm
+            </h1>
+        </div>
+
     </div>
-    <div class="sidebar">
-        <a href="#menu">Menu</a>
-        <a href="#general-info">General Information</a>
-    </div>
+
 </body>
 </html>
